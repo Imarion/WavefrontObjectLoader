@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'about.ui'
 **
-** Created by: Qt User Interface Compiler version 5.3.1
+** Created by: Qt User Interface Compiler version 5.3.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -39,7 +39,7 @@ public:
         Version->setGeometry(QRect(80, 20, 41, 16));
         label = new QLabel(About);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(30, 40, 131, 16));
+        label->setGeometry(QRect(40, 40, 110, 16));
 
         retranslateUi(About);
 
@@ -51,7 +51,7 @@ public:
         About->setWindowTitle(QApplication::translate("About", "Dialog", 0));
         Subject->setText(QApplication::translate("About", "Wavefront object loader", 0));
         Version->setText(QApplication::translate("About", "v 0.12", 0));
-        label->setText(QApplication::translate("About", "By Emmanuel Renquin (c)", 0));
+        label->setText(QApplication::translate("About", "By Emmanuel Renquin", 0));
     } // retranslateUi
 
 };

@@ -116,35 +116,18 @@ int WaveFrontObject::load(QString FileName)
         {
             // Read material properties
             QString tempoMtlChaine(&chaine.str().c_str()[6]); // skip mtllib
-            int    prevCaptEnd=0;
-            string materialFilename;
-            QRegularExpression mtlRegExp(".mtl");
-            QRegularExpressionMatchIterator mtlIt = mtlRegExp.globalMatch(tempoMtlChaine);
+            qDebug() << "tempoMtlChaine: " << tempoMtlChaine;
+            QString materialFilename;
+            QRegularExpression mtlRegExp("(.*?\\.mtl\\b)");
 
+            QRegularExpressionMatchIterator mtlIt = mtlRegExp.globalMatch(tempoMtlChaine);
             while (mtlIt.hasNext())
             {
                 QRegularExpressionMatch mtlMatch = mtlIt.next();
-                int mtlCaptEnd = mtlMatch.capturedEnd();
-                materialFilename = tempoMtlChaine.mid(prevCaptEnd, mtlCaptEnd).toStdString();
-                prevCaptEnd = mtlMatch.capturedEnd();
-                materialFilename.erase(materialFilename.begin(), std::find_if(materialFilename.begin(), materialFilename.end(), std::bind1st(std::not_equal_to<char>(), ' ')));
-                materialFilename = QFileInfo(FileName).absolutePath().toStdString() + '/' + materialFilename;
-                mMaterials.read(materialFilename);
-                qDebug() << "materialFilename: " << QString(materialFilename.c_str());
+                materialFilename = QFileInfo(FileName).absolutePath() + '/' + mtlMatch.captured().trimmed();
+                mMaterials.read(materialFilename.toStdString());
+                qDebug() << "materialFilename: " <<materialFilename;
             }
-
-            //chaine >> materialFilename;
-            //getline(chaine, materialFilename, ".mtl");
-/*
-            materialFilename = QFileInfo(FileName).absolutePath().toStdString() + '/' + materialFilename;
-            while (!chaine.fail())
-            {
-                qDebug() << materialFilename.c_str();
-                mMaterials.read(materialFilename);
-                chaine >> materialFilename;
-                //getline(chaine, materialFilename, ".mtl");
-            }
-*/
         }
     }
 
