@@ -221,8 +221,9 @@ void GlWindow::initialize()
 //    glEnable(GL_CULL_FACE);
 //    glFrontFace(GL_CW);
 
+    glFrontFace(GL_CCW);
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
+    //glDepthFunc(GL_LEQUAL);
 
 }
 
@@ -290,7 +291,7 @@ void GlWindow::render()
         glDrawElements(GL_TRIANGLES, mWaveFrontObject.getInstance().getNumIndices(), GL_UNSIGNED_INT, (GLvoid *)(sizeof(GLuint)*0));
         */        
 
-        glDrawArrays(GL_TRIANGLES, 0, mWaveFrontObject.getInstance().getNumIndices());
+        glDrawArrays(GL_TRIANGLE_FAN, 0, mWaveFrontObject.getInstance().getNumIndices());
     }
 
     mProgram->release();
